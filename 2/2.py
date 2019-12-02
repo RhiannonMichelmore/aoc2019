@@ -1,24 +1,8 @@
 import sys
 import copy
 
-# does operation on ops, returns new starting position
-def operate(op,position,ops):
-    if op == 99:
-        # as 99 is halt
-        return -1
-    elif op == 1:
-        first = ops[ops[position+1]]
-        second = ops[ops[position+2]]
-        plus = first + second
-        ops[ops[position+3]] = plus
-        return position + 4
-    elif op == 2:
-        first = ops[ops[position+1]]
-        second = ops[ops[position+2]]
-        mult = first * second
-        ops[ops[position+3]] = mult
-        return position + 4
-
+sys.path.insert(1,'/home/rhiba/aoc2019/utils')
+import intcode
 
 def main(in_string):
     ops = list(map(int,in_string.strip().split(',')))
@@ -32,8 +16,7 @@ def main(in_string):
             ops[2] = verb
 
             while not position == -1:
-                current_op = ops[position]
-                position = operate(current_op,position,ops)
+                position = intcode.operate(position,ops)
 
             if ops[0] == 19690720:
                 print('found target')
