@@ -33,7 +33,7 @@ def main(in_string):
     # now check coord lists for duplicates
     res = list(set(wire_coords[0]) & set(wire_coords[1]))
 
-    # now get closest to 0,0
+    # now get min number of steps
     curr_min = None
     for (x,y) in res:
         if not (x==0 and y==0):
