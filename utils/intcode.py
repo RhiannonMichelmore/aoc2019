@@ -1,5 +1,6 @@
+import time
 # takes current position and list of ops, returns new position 
-def operate(position,ops,inputs,outputs):
+def operate(position,ops,inputs=[],outputs=[],threaded=False):
     instruction = ops[position]
     opcode = int(str(instruction)[-2:])
     param_modes = str(instruction)[:-2]
@@ -53,6 +54,9 @@ def operate(position,ops,inputs,outputs):
 
     elif opcode == 3:
         # Input and store, (dont need to check param mode)
+        if threaded == True:
+            while len(inputs) == 0:
+                pass
         input_val = inputs.pop(0)
 
         ops[ops[position+1]] = input_val
